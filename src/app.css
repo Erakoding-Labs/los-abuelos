@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+/* ===========================================================================
+   Los Abuelos — Design System
+   Warm terracotta · cream · charcoal · gold
+   =========================================================================== */
+@theme {
+	/* Brand palette */
+	--color-cream: #faf4ea;
+	--color-cream-dark: #f3e9d7;
+	--color-charcoal: #211c18;
+	--color-charcoal-soft: #2f2823;
+
+	--color-terracotta-50: #fdf3ef;
+	--color-terracotta-100: #fbe3d8;
+	--color-terracotta-200: #f6c4ae;
+	--color-terracotta-300: #ee9a78;
+	--color-terracotta-400: #e3704b;
+	--color-terracotta-500: #c8502b;
+	--color-terracotta-600: #b03f20;
+	--color-terracotta-700: #92331c;
+	--color-terracotta-800: #762c1c;
+	--color-terracotta-900: #61281a;
+
+	--color-gold-300: #f0cf86;
+	--color-gold-400: #e6b94f;
+	--color-gold-500: #d6a235;
+	--color-gold-600: #b9842a;
+
+	--color-olive-500: #5d6b3a;
+	--color-olive-600: #4a5630;
+
+	/* Semantic */
+	--color-brand: var(--color-terracotta-500);
+	--color-brand-dark: var(--color-terracotta-700);
+	--color-accent: var(--color-gold-500);
+
+	/* Type */
+	--font-display: 'Fraunces', ui-serif, Georgia, serif;
+	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+	/* Radii */
+	--radius: 0.75rem;
+
+	/* Shadows */
+	--shadow-soft: 0 1px 2px rgb(33 28 24 / 0.04), 0 8px 24px rgb(33 28 24 / 0.08);
+	--shadow-lift: 0 2px 4px rgb(33 28 24 / 0.06), 0 20px 48px rgb(33 28 24 / 0.16);
+
+	/* Animations */
+	--ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+	}
+	body {
+		text-rendering: optimizeLegibility;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		font-family: var(--font-display);
+		font-optical-sizing: auto;
+		letter-spacing: -0.01em;
+	}
+	::selection {
+		background: var(--color-terracotta-500);
+		color: var(--color-cream);
+	}
+	:focus-visible {
+		outline: 2px solid var(--color-terracotta-500);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+}
+
+@layer components {
+	.container-px {
+		@apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+	}
+	.eyebrow {
+		@apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-terracotta-600;
+	}
+	.link-underline {
+		@apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll-reveal (Motion-style) — driven by the `reveal` action.
+   --------------------------------------------------------------------------- */
+[data-reveal] {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.7s var(--ease-out-soft),
+		transform 0.7s var(--ease-out-soft);
+	will-change: opacity, transform;
+}
+[data-reveal='in'] {
+	opacity: 1;
+	transform: none;
+}
+[data-reveal-axis='x'] {
+	transform: translateX(40px);
+}
+[data-reveal-axis='scale'] {
+	transform: scale(0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+	[data-reveal] {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Subtle ambient float for hero accents */
+@keyframes float-slow {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-12px);
+	}
+}
+.animate-float-slow {
+	animation: float-slow 7s ease-in-out infinite;
+}
+
+/* Marquee for review ticker */
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+.animate-marquee {
+	animation: marquee 38s linear infinite;
+}
+.marquee-mask {
+	mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Thin scrollbar for menu category rail */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
