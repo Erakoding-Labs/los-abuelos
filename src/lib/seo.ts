@@ -2,8 +2,7 @@ import { business, hours } from './data/business';
 
 export const SITE_URL = 'https://www.losabuelosmenard.com';
 // Falls back to the hero photo until owned OG art is added at /og-image.jpg.
-export const OG_IMAGE =
-	'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&q=72&w=1200&h=630&fit=crop';
+export const OG_IMAGE = 'https://www.losabuelosmenard.com/og-image.jpg';
 
 export interface SeoInput {
 	title: string;
